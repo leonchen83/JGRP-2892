@@ -52,10 +52,6 @@ public class Main {
 			}
 		});
 		
-		// bind ip address
-		
-		System.setProperty("jgroups.bind_addr", localIp);
-		
 		// cleanup on JVM shutdown
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
 			System.out.println("JVM shutting down, cleaning up subprocesses...");
