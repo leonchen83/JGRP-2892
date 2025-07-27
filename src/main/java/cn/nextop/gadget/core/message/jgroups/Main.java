@@ -43,14 +43,18 @@ public class Main {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		String path = "/app/erebor/jgroups/MyTestCluster";
+		
 		// Clean up previous cluster files
-		Files.list(Path.of("/app/erebor/jgroups/MyTestCluster")).forEach(path -> {
-			try {
-				Files.deleteIfExists(path);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
+		if (Files.exists(Path.of(path))) {
+			Files.list(Path.of(path)).forEach(p -> {
+				try {
+					Files.deleteIfExists(p);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+		}
 		
 		// cleanup on JVM shutdown
 		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
